@@ -1,7 +1,5 @@
-let size = 25;
+let size = 28;
 const grid = document.querySelector('.grid');
-
-console.log(grid.clientWidth);
 
 for (let i = 0; i < size; i++) {
   const gridCol = document.createElement('div');
@@ -11,7 +9,7 @@ for (let i = 0; i < size; i++) {
   for (let j = 0; j < size; j++) {
     const gridBox = document.createElement('div');
     gridBox.classList.add('grid-box');
-    gridBox.setAttribute('style', 'background-color: #fff;')
+    gridBox.setAttribute('style', 'background-color: rgb(255, 255, 255);')
     gridCol.appendChild(gridBox);
   }
 }
@@ -25,8 +23,16 @@ boxes.forEach((box) => {
     }
 
     e.target.style.backgroundColor = hslToRGB(hslArray);
-  })
-})
+  });
+});
+
+const resetBtn = document.querySelector('#reset-btn');
+resetBtn.addEventListener('click', () => {
+  boxes.forEach((box) => {
+    box.style.backgroundColor = 'rgb(255, 255, 255)';
+  });
+});
+
 
 
 function rgbToHSL(rgbString) {
