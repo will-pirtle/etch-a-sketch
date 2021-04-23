@@ -1,39 +1,71 @@
-let size = 28;
+let size = 16;
+let penColor = 'grayscale';
 const grid = document.querySelector('.grid');
 
-for (let i = 0; i < size; i++) {
-  const gridCol = document.createElement('div');
-  gridCol.classList.add('grid-col');
-  grid.appendChild(gridCol);
+fillGrid(size);
 
-  for (let j = 0; j < size; j++) {
-    const gridBox = document.createElement('div');
-    gridBox.classList.add('grid-box');
-    gridBox.setAttribute('style', 'background-color: rgb(255, 255, 255);')
-    gridCol.appendChild(gridBox);
+const resetBtn = document.querySelector('#reset-btn');
+const grayscale = document.querySelector('#grayscale');
+const rainbow = document.querySelector('#rainbow');
+
+resetBtn.addEventListener('click', changeSize);
+grayscale.addEventListener('click', () => {
+  penColor = 'grayscale';
+});
+rainbow.addEventListener('click', () => {
+  penColor = 'rainbow';
+});
+
+
+// Helper Functions
+function fillGrid(size) {
+  for (let i = 0; i < size; i++) {
+    const gridCol = document.createElement('div');
+    gridCol.classList.add('grid-col');
+    grid.appendChild(gridCol);
+
+    for (let j = 0; j < size; j++) {
+      const gridBox = document.createElement('div');
+      gridBox.classList.add('grid-box');
+      gridBox.setAttribute('style', 'background-color: rgb(255, 255, 255);');
+      gridBox.addEventListener('mouseover', changeColor);
+      gridCol.appendChild(gridBox);
+    }
   }
 }
 
-const boxes = document.querySelectorAll('.grid-box');
-boxes.forEach((box) => {
-  box.addEventListener('mouseover', (e) => {
+function changeSize() {
+  newSize = parseInt(prompt("Enter new size for box: ", `${size}`));
+  
+  if (!newSize) {
+    return;
+  } else if (newSize > 64 || newSize < 1) {
+    alert("Please enter a number from 1-100!");
+  } else {
+    clearGrid();
+    fillGrid(newSize);
+  }
+}
+
+function changeColor(e) {
+  if (penColor == 'grayscale') {
     let hslArray = rgbToHSL(e.target.style.backgroundColor);
     if (hslArray[2] > 0) {
       hslArray[2] -= 25;
     }
 
     e.target.style.backgroundColor = hslToRGB(hslArray);
+  } else if (penColor == 'rainbow') {
+    // TODO
+  }
+}
+
+function clearGrid() {
+  const cols = document.querySelectorAll('.grid-col');
+  cols.forEach((col) => {
+    grid.removeChild(col);
   });
-});
-
-const resetBtn = document.querySelector('#reset-btn');
-resetBtn.addEventListener('click', () => {
-  boxes.forEach((box) => {
-    box.style.backgroundColor = 'rgb(255, 255, 255)';
-  });
-});
-
-
+}
 
 function rgbToHSL(rgbString) {
   // turn "rgb(r, g, b)" into ["r", "g", "b"]
