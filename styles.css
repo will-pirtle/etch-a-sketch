@@ -14,9 +14,31 @@
   align-items: center;
 }
 
+.title {
+  margin-bottom: 1.4rem;
+}
+
+.pen-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 500px;
+}
+
+.pen-button {
+  display: flex;
+  align-items: center;
+}
+
+.button-text {
+  margin-left: 0.3rem;
+}
+
 .grid {
   width: 70vh;
   height: 70vh;
+  margin: 1.2rem 0;
 
   display: flex;
   border: 1px solid black;
