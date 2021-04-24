@@ -51,13 +51,22 @@ function changeColor(e) {
   if (penColor == 'grayscale') {
     let hslArray = rgbToHSL(e.target.style.backgroundColor);
     if (hslArray[2] > 0) {
-      hslArray[2] -= 25;
+      hslArray[2] -= 15;
     }
 
     e.target.style.backgroundColor = hslToRGB(hslArray);
   } else if (penColor == 'rainbow') {
-    // TODO
+    let hslArray = getRandomColor();
+    
+    e.target.style.backgroundColor = hslToRGB(hslArray);
   }
+}
+
+function getRandomColor() {
+  let h = Math.floor(Math.random() * 356);
+  let s = 100;
+  let l = Math.floor(Math.random() * (75 - 50) + 50);
+  return [h, s, l];
 }
 
 function clearGrid() {
