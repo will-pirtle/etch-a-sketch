@@ -40,7 +40,7 @@ function changeSize() {
   if (!newSize) {
     return;
   } else if (newSize > 64 || newSize < 1) {
-    alert("Please enter a number from 1-100!");
+    alert("Please enter a number from 1-64!");
   } else {
     clearGrid();
     fillGrid(newSize);
@@ -57,7 +57,7 @@ function changeColor(e) {
     e.target.style.backgroundColor = hslToRGB(hslArray);
   } else if (penColor == 'rainbow') {
     let hslArray = getRandomColor();
-    
+
     e.target.style.backgroundColor = hslToRGB(hslArray);
   }
 }
